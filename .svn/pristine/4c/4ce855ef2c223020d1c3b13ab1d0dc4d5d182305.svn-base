@@ -1,0 +1,38 @@
+package cn.edu.zut.jmtshop.entity;
+
+import java.io.Serializable;
+
+public class ProductAttr implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private int product_attrid;
+	private Product product;
+	private Attr attr;
+	private String attrValue;
+	
+	public int getProduct_attrid() {
+		return product_attrid;
+	}
+	public void setProduct_attrid(int product_attrid) {
+		this.product_attrid = product_attrid;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Attr getAttr() {
+		return attr;
+	}
+	public void setAttr(Attr attr) {
+		this.attr = attr;
+	}
+	public String getAttrValue() {
+		return attrValue;
+	}
+	public void setAttrValue(String attrValue) {
+		this.attrValue = attrValue;
+	}
+}

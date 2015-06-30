@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<constant name="struts.devMode" value="true"/>
+	<!-- 告诉struts2不要创建action，让spring帮助创建action -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<include file="struts-admin.xml"></include>
+</struts>

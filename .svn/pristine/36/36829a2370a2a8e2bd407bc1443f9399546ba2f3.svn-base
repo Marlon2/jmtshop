@@ -1,0 +1,17 @@
+package cn.edu.zut.jmtshop.dao;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.SuperType;
+
+public interface SuperTypeDao {
+
+	List<SuperType> findAllSuperType(int firstRow);
+
+	int findSuperTypeNums();
+
+	SuperType findSuperType(int supertypeid);
+
+	void updateSuperType(SuperType e_superType);
+
+}

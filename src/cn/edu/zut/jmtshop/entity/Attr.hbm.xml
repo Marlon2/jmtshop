@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2014-3-30 15:01:39 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.Attr" table="ATTR">
+        <id name="attrid" type="int">
+            <column name="ATTRID" />
+            <generator class="native" />
+        </id>
+        <property name="attrname" type="java.lang.String">
+            <column name="ATTRNAME" />
+        </property>
+        <property name="attrtype" type="int">
+            <column name="ATTRTYPE" />
+        </property>
+        <property name="attrvalue" type="java.lang.String">
+            <column name="ATTRVALUE" />
+        </property>
+        <property name="subtypeid" type="int">
+            <column name="SUBTYPEID" />
+        </property>
+    </class>
+</hibernate-mapping>

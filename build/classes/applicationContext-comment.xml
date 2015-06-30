@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- dao -->
+
+<bean id="commentDao" class="cn.edu.zut.jmtshop.dao.impl.CommentDaoImpl">
+ <property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<!-- service -->
+<bean id="commentService" class="cn.edu.zut.jmtshop.service.impl.CommentServiceImpl">
+  <property name="commentDao" ref="commentDao"/>
+</bean>
+<!-- action -->
+<bean id="commentAction" class="cn.edu.zut.jmtshop.action.CommentAction">
+ <property name="commentService" ref="commentService"></property>
+</bean>
+</beans>

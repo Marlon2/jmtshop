@@ -1,0 +1,15 @@
+package cn.edu.zut.jmtshop.dao.impl;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import cn.edu.zut.jmtshop.dao.ProductAttrDao;
+import cn.edu.zut.jmtshop.entity.ProductAttr;
+
+public class ProductAttrDaoImpl extends HibernateDaoSupport implements ProductAttrDao {
+
+	@Override
+	public void saveOrUpdateProAttr(ProductAttr productAttr) {
+		this.getHibernateTemplate().save(productAttr);
+	}
+
+}

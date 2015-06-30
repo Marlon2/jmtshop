@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加属性</title>
+<%
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+%>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#supertypeselect").change(function(){
+			var supertypeid=$("#supertypeselect").val();
+			$.ajax({
+			    url:'<%=basePath%>/product/attr_getSubType.action',
+				type : 'post',
+				dataType : 'json',
+				data : {e_supertypeid : supertypeid},
+				success : createSubtype
+			});
+		});
+		function createSubtype(json) {
+			var dataObjs = (json.subTypes);
+			$("#subtypeselect option[value!='']").remove();
+			$.each(dataObjs, function(i, subType) {
+				$option = $("<option></option>");
+				$option.attr("value", subType.subtypeid);
+				$option.text(subType.subtypename);
+				$("#subtypeselect").append($option);
+			});
+		};
+		$("input[name='attr.attrtype']").click(function(){
+			var num = $("input[name='attr.attrtype']:checked").val();
+			if(num==0){
+				$("#kexuan").hide();
+			}else{
+				$("#kexuan").show();
+			}
+		});
+	});
+
+</script>
+<sb:head/>
+</head>
+<body>
+	<div align="center">
+		<form action="<%=basePath %>/product/attr_save" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>大类名称：</td>
+					<td>
+					<select name="supertypeid" id="supertypeselect">
+						<option name="">..请选择大类..</option>
+						<s:iterator value="superTypes" var="superType">
+							<option value='<s:property value="#superType.supertypeid" />'><s:property value="#superType.supertypename" /></option>
+						</s:iterator>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>小类名称：</td>
+					<td>
+					<select name="attr.subtypeid" id="subtypeselect">
+					<option value="">..请选择小类..</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>属性名称：</td>
+					<td><input type="text" name="attr.attrname" require="true">
+					</td>
+				</tr>
+				<tr>
+					<td>属性类型：</td>
+					<td><input type="radio" name="attr.attrtype" value="0">手动录入&nbsp;
+					 <input type="radio" name="attr.attrtype" value="1">从下面列表中选择</td>
+				</tr>
+				<tr id="kexuan">
+					<td>可选值列表:</td>
+					<td><textarea rows="5" cols="20" name="attr.attrvalue"></textarea></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="保存"></td>
+					<td><input type="reset" value="重置"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

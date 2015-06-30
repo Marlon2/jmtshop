@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<package name="userOrder" namespace="/order" extends="struts-default">
+	  <action name="userOrder_*" method="{1}" class="userOrderAction">
+	  <result name="searchSuccess">/order/orderview.jsp</result>
+	   <result name="list">/order/orderview.jsp</result>
+	   <result name="info">/order/userOrderInfo.jsp</result>
+	   <result name="edit">/order/userOrderEdit.jsp</result>
+	   <result name="editSuccess" type="redirect">/order/userOrder_getUserOrderView</result>
+	   <result name="deleteSuccess" type="redirect">/order/userOrder_getUserOrderView</result>
+	   <result name="error">/error.jsp</result>
+	  </action>
+	  
+	  <action name="orderItem_*" method="{1}" class="orderItemAction">
+	     <result name="searchSuccess">/order/orderItemView.jsp</result>
+	    <result name="list">/order/orderItemView.jsp</result>
+	    <result name="info">/order/orderItemInfo.jsp</result>
+	   <result name="edit">/order/orderItemEdit.jsp</result>
+	   <result name="editSuccess" type="redirect">/order/orderItem_getUserOrderItemView</result>
+	   <result name="deleteSuccess" type="redirect">/order/orderItem_getUserOrderItemView</result>
+	    <result name="deleteBeachSuccess" type="redirect">/order/orderItem_getUserOrderItemView</result>
+	    <result name="error">/error.jsp</result>
+	  </action>
+	</package>
+</struts>

@@ -1,0 +1,18 @@
+package cn.edu.zut.jmtshop.service;
+
+
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.UserOrder;
+
+public interface UserOrderService {
+	public boolean addUserOrder(UserOrder userOrder);
+	public boolean deleteUserOrderById(int id);
+	public boolean updateUserOrder(UserOrder userOrder);
+	public UserOrder getUserOrderById(int id);
+	public boolean deleteUserOrderBeach(int ids[]);
+	public int getAllRows();
+	public List<UserOrder> getUserOrdersPrePage(int currentPrePage);
+//	public PageBean<UserOrder> setPageBean(int currentPage);
+}

@@ -1,0 +1,51 @@
+package cn.edu.zut.jmtshop.service.impl;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.dao.SubTypeDao;
+import cn.edu.zut.jmtshop.entity.SubType;
+import cn.edu.zut.jmtshop.service.SubTypeService;
+
+public class SubTypeServiceImpl implements SubTypeService {
+
+	private SubTypeDao subTypeDao;
+	@Override
+	public int getSubTypeNums(String e_subtypename) {
+		return subTypeDao.getSubTypeNums(e_subtypename);
+	}
+
+	@Override
+	public List<SubType> getAllSubType(int firstRow, String e_subtypename) {
+		return subTypeDao.getAllSubType(firstRow,e_subtypename);
+	}
+
+	public SubTypeDao getSubTypeDao() {
+		return subTypeDao;
+	}
+
+	public void setSubTypeDao(SubTypeDao subTypeDao) {
+		this.subTypeDao = subTypeDao;
+	}
+
+	@Override
+	public void saveOrUpdateSubType(SubType e_subType) {
+		this.subTypeDao.saveOrUpdateSubType(e_subType);
+	}
+
+	@Override
+	public SubType getSubTypeByName(String subtypename) {
+		return this.subTypeDao.getSubTypeByName(subtypename);
+	}
+
+	@Override
+	public SubType getSubTypeById(int e_subtypeid) {
+		
+		return this.subTypeDao.getSubTypeById(e_subtypeid);
+	}
+
+	@Override
+	public void deleteSubType(int e_subtypeid) {
+		this.subTypeDao.deleteSubType(e_subtypeid);
+	}
+
+}

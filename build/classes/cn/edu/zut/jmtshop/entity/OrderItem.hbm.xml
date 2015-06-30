@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-21 12:13:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.OrderItem" table="ORDERITEM">
+        <id name="orderItemId" type="int">
+            <column name="ORDERITEMID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="userOrder" class="cn.edu.zut.jmtshop.entity.UserOrder" fetch="join" lazy="false">
+            <column name="USERORDERID" />
+        </many-to-one>
+        <many-to-one name="product" class="cn.edu.zut.jmtshop.entity.Product" fetch="join" lazy="false">
+            <column name="PRODUCTID" />
+        </many-to-one>
+        <property name="productName" type="java.lang.String">
+            <column name="PRODUCTNAME" />
+        </property>
+        <property name="price" type="double">
+            <column name="PRICE" />
+        </property>
+        <property name="productNum" type="int">
+            <column name="PRODUCTNUM" />
+        </property>
+    </class>
+</hibernate-mapping>

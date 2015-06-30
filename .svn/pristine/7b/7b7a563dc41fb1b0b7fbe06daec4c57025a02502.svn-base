@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-21 12:13:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.Product" table="PRODUCT">
+        <id name="productId" type="int">
+            <column name="PRODUCTID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="superType" class="cn.edu.zut.jmtshop.entity.SuperType" fetch="join">
+            <column name="SUPERTYPEID" />
+        </many-to-one>
+        <many-to-one name="subType" class="cn.edu.zut.jmtshop.entity.SubType" fetch="join">
+            <column name="SUBTYPEID" />
+        </many-to-one>
+        <property name="brand" type="java.lang.String">
+            <column name="BRAND" />
+        </property>
+        <property name="productName" type="java.lang.String">
+            <column name="PRODUCTNAME" />
+        </property>
+        <property name="introduce" type="java.lang.String">
+            <column name="INTRODUCE" />
+        </property>
+        <property name="price" type="double">
+            <column name="PRICE" />
+        </property>
+        <property name="nowPrice" type="double">
+            <column name="NOWPRICE" />
+        </property>
+        <property name="picture" type="java.lang.String">
+            <column name="PICTURE" />
+        </property>
+        <property name="inTime" type="java.util.Date">
+            <column name="INTIME" />
+        </property>
+        <property name="isNew" type="int">
+            <column name="ISNEW" />
+        </property>
+        <property name="isSale" type="int">
+            <column name="ISSALE" />
+        </property>
+        <property name="isHost" type="int">
+            <column name="ISHOST" />
+        </property>
+        <property name="isSpecial" type="int">
+            <column name="ISSPECIAL" />
+        </property>
+        <property name="productNum" type="int">
+            <column name="PRODUCTNUM" />
+        </property>
+        <property name="origin" type="java.lang.String">
+            <column name="ORIGIN" />
+        </property>
+    </class>
+</hibernate-mapping>

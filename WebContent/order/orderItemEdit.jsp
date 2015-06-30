@@ -1,0 +1,115 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib prefix="sb" uri="/struts-bootstrap-tags"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单项信息修改</title>
+<%
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath();
+%>
+<script type="text/javascript" src="<%=basePath%>/js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#price").focus(function() {
+			if ($(this).val().trim() == "") {
+				$(this).val(this.defaultValue);
+				$(this).next().text("");
+			}
+		}).blur(function() {
+			var regExp = new RegExp("^\\d+(\\.\\d+)?$");
+			if ($(this).val().trim() == "") {
+				$(this).next().attr("color", "red").text("此项必填。请重新输入!");
+			} else if (!regExp.test($(this).val().trim())) {
+				$(this).next().attr("color", "red").text("请输入非负浮点数!");
+			} else {
+				$(this).next().attr("color", "green").text("√");
+			}
+		});
+		$("#resetBtn").click(function() {
+			$("#price").each(function() {
+				$(this).val(this.defaultValue);
+				$(this).next().text("");
+			});
+		});
+		$("#sumbitBtn").click(
+				function() {
+					var flag = true;
+					if ($("#price").next().text().trim() != "√"
+							&& $("#price").next().text().trim() != "") {
+						flag = false;
+						return;
+					}
+					$("#price").each(function() {
+						if ($(this).val() == this.defaultValue) {
+							if (confirm("没有修改任何一项，是否继续？")) {
+								$("#editFprm").submit();
+							} else {
+								return;
+							}
+						} else if (flag) {
+							$("#editFprm").submit();
+						} else {
+							alert("请检查输入项是否符合要求!");
+							return;
+						}
+
+					});
+
+				});
+	});
+</script>
+<sb:head />
+</head>
+<body>
+	<s:form action="orderItem_userOrderItemEdit" id="editFprm"
+		theme="simple">
+		<table class="table table-bordered table-striped table-hover">
+			<tr class="success">
+				<td><label>订单详情编号</label></td>
+				<td><input type="text" value="${orderItem.orderItemId }"
+					name="orderItem.orderItemId" readonly="readonly" />
+			</tr>
+			<tr class="error">
+				<td><label>订单号</label></td>
+				<td><input type="text" value="${orderItem.userOrder.orderId }"
+					name="orderItem.userOrder.orderId" readonly="readonly" /></td>
+			</tr>
+			<tr class="success">
+				<td><label>商品编号</label></td>
+				<td><input type="text" value="${orderItem.product.productid }"
+					name="orderItem.product.productid" readonly="readonly" /><font></font></td>
+			</tr>
+			<tr class="error">
+				<td><label>商品名称</label></td>
+				<td><input type="text" value="${orderItem.productName }"
+					name="orderItem.productName" readonly="readonly" /><font></font></td>
+			</tr>
+			<tr class="success">
+				<td><label>价格<font color="red">*</font></label></td>
+				<td><input type="text" id="price" value="${orderItem.price }"
+					name="orderItem.price" /><font></font></td>
+			</tr>
+			<tr class="error">
+				<td><label>商品数量</label></td>
+				<td><input type="text" id="phone"
+					value="${orderItem.productNum }" name="orderItem.productNum"
+					readonly="readonly" /><font></font></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div align="center">
+						<input type="button" id="resetBtn" class="btn" value="重置" />&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="button" id="sumbitBtn" class="btn" value="修改" />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</s:form>
+
+</body>
+</html>

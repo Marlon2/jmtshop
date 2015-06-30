@@ -1,0 +1,43 @@
+package cn.edu.zut.jmtshop.dao.impl;
+
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import cn.edu.zut.jmtshop.dao.SuperTypeDao;
+import cn.edu.zut.jmtshop.entity.SuperType;
+import cn.edu.zut.jmtshop.util.PageConstants;
+
+public class SuperTypeDaoImpl extends HibernateDaoSupport implements SuperTypeDao {
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SuperType> findAllSuperType(int firstRow) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(SuperType.class);
+		return this.getHibernateTemplate().findByCriteria(criteria, firstRow, PageConstants.MAX_PAGESIZE);
+	}
+
+	@Override
+	public int findSuperTypeNums() {
+		try {
+			Long count = (Long) this.getHibernateTemplate().find("select count(*) from SuperType").get(0);
+			return count.intValue();
+		} catch (Exception e) {
+//			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public SuperType findSuperType(int supertypeid) {
+		return this.getHibernateTemplate().get(SuperType.class, supertypeid);
+	}
+
+	@Override
+	public void updateSuperType(SuperType e_superType) {
+//		System.out.println(e_superType.getSupertypeid()+"---"+e_superType.getSupertypename());
+		this.getHibernateTemplate().saveOrUpdate(e_superType);
+	}
+
+}

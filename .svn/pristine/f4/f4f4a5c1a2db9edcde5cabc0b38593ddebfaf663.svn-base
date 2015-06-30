@@ -1,0 +1,25 @@
+package cn.edu.zut.jmtshop.service.impl;
+
+import cn.edu.zut.jmtshop.dao.ProductAttrDao;
+import cn.edu.zut.jmtshop.entity.ProductAttr;
+import cn.edu.zut.jmtshop.service.ProductAttrService;
+
+public class ProductAttrServiceImpl implements ProductAttrService {
+
+	private ProductAttrDao productAttrDao;
+	@Override
+	public void saveOrUpdateProAttr(ProductAttr productAttr) {
+		productAttrDao.saveOrUpdateProAttr(productAttr);
+	}
+	public ProductAttrDao getProductAttrDao() {
+		return productAttrDao;
+	}
+	public void setProductAttrDao(ProductAttrDao productAttrDao) {
+		this.productAttrDao = productAttrDao;
+	}
+	@Override
+	public void deleteByPid(int productid) {
+		this.productAttrDao.deleteByPid(productid);
+	}
+
+}

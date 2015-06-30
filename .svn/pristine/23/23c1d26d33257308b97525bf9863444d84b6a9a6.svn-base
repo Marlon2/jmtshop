@@ -1,0 +1,125 @@
+package cn.edu.zut.jmtshop.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Product implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private int productId;//商品编号
+	private SuperType superType;//大类
+	private SubType subType;//小类
+	private String brand;//品牌
+	private String productName;//商品名称
+	private String introduce;//商品介绍
+	private double price;//进价
+	private double nowPrice;//现在价格
+	private String picture;//图片
+	private Date inTime;//上架时间 ，默认当前
+	private int isNew;//是否新品，1为新品，0为旧品
+	private int isSale;//是否特价，1为特价，0为不特价
+	private int isHost;//是否热销，1为热销，0为非热销
+	private int isSpecial;//是否推荐
+	private int productNum;//商品数量
+	private String origin;//商品来源
+	
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public SuperType getSuperType() {
+		return superType;
+	}
+	public void setSuperType(SuperType superType) {
+		this.superType = superType;
+	}
+	public SubType getSubType() {
+		return subType;
+	}
+	public void setSubType(SubType subType) {
+		this.subType = subType;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public double getNowPrice() {
+		return nowPrice;
+	}
+	public void setNowPrice(double nowPrice) {
+		this.nowPrice = nowPrice;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public Date getInTime() {
+		return inTime;
+	}
+	public void setInTime(Date inTime) {
+		this.inTime = inTime;
+	}
+	public int getIsNew() {
+		return isNew;
+	}
+	public void setIsNew(int isNew) {
+		this.isNew = isNew;
+	}
+	public int getIsSale() {
+		return isSale;
+	}
+	public void setIsSale(int isSale) {
+		this.isSale = isSale;
+	}
+	public int getIsHost() {
+		return isHost;
+	}
+	public void setIsHost(int isHost) {
+		this.isHost = isHost;
+	}
+	public int getIsSpecial() {
+		return isSpecial;
+	}
+	public void setIsSpecial(int isSpecial) {
+		this.isSpecial = isSpecial;
+	}
+	public int getProductNum() {
+		return productNum;
+	}
+	public void setProductNum(int productNum) {
+		this.productNum = productNum;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	
+	
+}

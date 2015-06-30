@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-20 18:56:57 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.ProductAttr" table="PRODUCT_ATTR">
+        <id name="product_attrid" type="int">
+            <column name="PRODUCT_ATTRID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="product" class="cn.edu.zut.jmtshop.entity.Product" fetch="join">
+            <column name="PRODUCTID" />
+        </many-to-one>
+        <many-to-one name="attr" class="cn.edu.zut.jmtshop.entity.Attr" fetch="join">
+            <column name="ATTRID" />
+        </many-to-one>
+        <property name="attrValue" type="java.lang.String">
+            <column name="ATTRVALUE" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-20 21:35:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.User" table="USER">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="native" />
+        </id>
+        <property name="userName" type="java.lang.String" not-null="true">
+            <column name="USERNAME" />
+        </property>
+        <property name="userPassword" type="java.lang.String" not-null="true">
+            <column name="USERPASSWORD" />
+        </property>
+        <property name="userEmail" type="java.lang.String" not-null="true">
+            <column name="USEREMAIL" />
+        </property>
+        <property name="trueName" type="java.lang.String" not-null="true">
+            <column name="TRUENAME" />
+        </property>
+        <property name="gender" type="java.lang.String" not-null="true">
+            <column name="GENDER" />
+        </property>
+        <property name="birthday" type="java.util.Date" not-null="true">
+            <column name="BIRTHDAY" />
+        </property>
+        <property name="address" type="java.lang.String" not-null="true">
+            <column name="ADDRESS" />
+        </property>
+        <property name="postCode" type="java.lang.String" not-null="true">
+            <column name="POSTCODE" />
+        </property>
+        <property name="phone" type="java.lang.String" length="11">
+            <column name="PHONE" />
+        </property>
+        <property name="mobil" type="java.lang.String" length="11">
+            <column name="MOBIL" />
+        </property>
+        <property name="socre" type="int" not-null="true">
+            <column name="SOCRE" />
+        </property>
+    </class>
+</hibernate-mapping>

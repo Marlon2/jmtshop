@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-20 20:35:42 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.Notice" table="NOTICE">
+        <id name="noticeId" type="int">
+            <column name="NOTICEID" />
+            <generator class="native" />
+        </id>
+        <property name="noticeTitle" type="java.lang.String">
+            <column name="NOTICETITLE" />
+        </property>
+        <property name="noticeContent" type="java.lang.String">
+            <column name="NOTICECONTENT" />
+        </property>
+        <property name="noticeTime" type="java.util.Date">
+            <column name="NOTICETIME" />
+        </property>
+    </class>
+</hibernate-mapping>

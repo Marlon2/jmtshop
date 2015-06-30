@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+<!-- SessionFactory创建工厂 -->
+<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+</bean>
+<!-- 事务管理器 -->
+<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<!-- 建立通知 -->
+<tx:advice id="txAdvice" transaction-manager="txManager">
+<!-- 事务语句 -->
+<tx:attributes>
+<!-- 所有以 'get' 开头的事务是read-only -->
+<tx:method name="get*" read-only="true"/>
+<tx:method name="*"/>
+</tx:attributes>
+</tx:advice>
+<!-- 装配通知： -->
+<aop:config>
+<aop:pointcut expression="execution(* com.edu.zut.sshusermanager.admin.service.*.*(..))" id="pc"/>
+<aop:advisor advice-ref="txAdvice" pointcut-ref="pc"/>
+</aop:config>
+<!-- dao层 -->
+
+<!-- service层 -->
+
+<!-- action层 -->
+<bean id="adminLogin" class="cn.edu.zut.jmtshop.action.AdminLoginAction"></bean>
+</beans>

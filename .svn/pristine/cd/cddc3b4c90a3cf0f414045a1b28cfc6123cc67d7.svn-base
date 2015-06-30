@@ -1,0 +1,23 @@
+package cn.edu.zut.jmtshop.service;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.Attr;
+
+public interface AttrService {
+
+	void saveOrUpdateAttr(Attr attr);
+
+	int getAttrNums(String e_attrname);
+
+	List<Attr> getAllAttrs(int firstRow, String e_attrname);
+
+	void deleteAttr(int e_attrid);
+
+	Attr getAttr(Attr attr);
+
+	Attr getAttr(int e_attrid);
+
+	List<Attr> getAttrsBySubTypeId(int e_subtypeid);
+
+}

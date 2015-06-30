@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-21 12:13:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.SuperType" table="SUPERTYPE">
+        <id name="supertypeid" type="int">
+            <column name="SUPERTYPEID" />
+            <generator class="native" />
+        </id>
+        <property name="supertypename" type="java.lang.String">
+            <column name="SUPERTYPENAME" />
+        </property>
+        <set name="subTypes" table="SUBTYPE" inverse="false" lazy="false">
+            <key>
+                <column name="SUPERTYPEID" />
+            </key>
+            <one-to-many class="cn.edu.zut.jmtshop.entity.SubType" />
+        </set>
+    </class>
+</hibernate-mapping>

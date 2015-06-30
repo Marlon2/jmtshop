@@ -1,0 +1,11 @@
+package cn.edu.zut.jmtshop.service;
+
+import cn.edu.zut.jmtshop.entity.ProductAttr;
+
+public interface ProductAttrService {
+
+	void saveOrUpdateProAttr(ProductAttr productAttr);
+
+	void deleteByPid(int productid);
+
+}

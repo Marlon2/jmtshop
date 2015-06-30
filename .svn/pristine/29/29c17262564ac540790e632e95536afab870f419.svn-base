@@ -1,0 +1,50 @@
+package cn.edu.zut.jmtshop.test;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.edu.zut.jmtshop.entity.OrderItem;
+import cn.edu.zut.jmtshop.service.OrderItemService;
+import cn.edu.zut.jmtshop.service.UserOrderService;
+
+public class OrderItemTest {
+	private ApplicationContext ac;
+	private OrderItemService itemService;
+	private UserOrderService service;
+	@Before
+	public void init(){
+		ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		itemService = (OrderItemService) ac.getBean("orderItemService");
+		service = (UserOrderService) ac.getBean("userOrderService");
+	}
+//	@Test
+	public void add(){
+		OrderItem item = new OrderItem();
+		item.setUserOrder(service.getUserOrderById(6));
+		item.setPrice(11);
+		item.setProductName("yg");
+		itemService.addOrderItem(item);
+	}
+//	@Test
+	public void delete(){
+		System.out.println(itemService.deleteOrderItem(3));
+	}
+//	@Test
+	public void deleteBeach(){
+		int[] ids = new int[3];
+		ids[0] = 5;
+		ids[1] = 6;
+		ids[2] = 7;
+		System.out.println(itemService.deleteOrderItemBeach(ids));
+	}
+//	@Test
+	public void getCounts(){
+		System.out.println(itemService.UserOrderItemCounts(6));
+	}
+	@Test
+	public void page(){
+		System.out.println(itemService.getUserOrderItemPrePage(1,6).get(2).getOrderItemId());
+	}
+}

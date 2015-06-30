@@ -1,0 +1,31 @@
+package cn.edu.zut.jmtshop.service.impl;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.dao.SuperTypeDao;
+import cn.edu.zut.jmtshop.entity.SuperType;
+import cn.edu.zut.jmtshop.service.SuperTypeService;
+
+public class SuperTypeServiceImpl implements SuperTypeService {
+
+	private SuperTypeDao superTypeDao;
+	@Override
+	public List<SuperType> getAllSuperType(int firstRow) {
+		
+		return superTypeDao.findAllSuperType(firstRow);
+	}
+
+	@Override
+	public int getSuperTypeNums() {
+		return superTypeDao.findSuperTypeNums();
+	}
+
+	public SuperTypeDao getSuperTypeDao() {
+		return superTypeDao;
+	}
+
+	public void setSuperTypeDao(SuperTypeDao superTypeDao) {
+		this.superTypeDao = superTypeDao;
+	}
+
+}

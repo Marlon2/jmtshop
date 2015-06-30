@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-21 12:13:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.UserOrder" table="USERORDER">
+        <id name="orderId" type="int">
+            <column name="ORDERID" />
+            <generator class="native" />
+        </id>
+        <property name="userName" type="java.lang.String" not-null="true">
+            <column name="USERNAME" />
+        </property>
+        <property name="realName" type="java.lang.String" not-null="true">
+            <column name="REALNAME" />
+        </property>
+        <property name="address" type="java.lang.String" not-null="true">
+            <column name="ADDRESS" />
+        </property>
+        <property name="postCode" type="java.lang.String" not-null="true" length="6">
+            <column name="POSTCODE" />
+        </property>
+        <property name="phone" type="java.lang.String" not-null="true" length="11">
+            <column name="PHONE" />
+        </property>
+        <property name="orderDate" type="java.util.Date" not-null="true">
+            <column name="ORDERDATE" />
+        </property>
+        <property name="flag" type="int" not-null="true">
+            <column name="FLAG" />
+        </property>
+    </class>
+</hibernate-mapping>

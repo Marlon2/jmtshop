@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-20 21:35:29 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.Comment" table="COMMENT">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="user" class="cn.edu.zut.jmtshop.entity.User" fetch="join" lazy="false">
+            <column name="USERID" />
+        </many-to-one>
+        <property name="ctitle" type="java.lang.String">
+            <column name="CTITLE" />
+        </property>
+        <many-to-one name="product" class="cn.edu.zut.jmtshop.entity.Product" fetch="join" lazy="false">
+            <column name="PRODUCTID" />
+        </many-to-one>
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" />
+        </property>
+        <property name="cdate" type="java.util.Date">
+            <column name="CDATE" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<!-- 告诉struts2不要创建action，让spring帮助创建action -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<!-- 上传文件的临时目录 -->
+
+   <constant name="struts.multipart.saveDir" value="e:\\temp"></constant>
+	<!-- 上传文件的总大小限制 -->
+	<constant name="struts.multipart.maxSize" value="5000000"></constant>
+	<!-- 资源文件配置 -->
+	<!-- <constant name="struts.custom.i18n.resources" value="ApplicationResources">
+	</constant> -->
+
+	<include file="struts-admin.xml"></include>
+	<include file="struts-user.xml"></include>
+	<include file="struts-order.xml"></include>
+	<include file="struts-product.xml"></include>
+	<include file="struts-comment.xml"></include>
+</struts>

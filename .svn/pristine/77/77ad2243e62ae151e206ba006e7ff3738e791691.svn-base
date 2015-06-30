@@ -1,0 +1,135 @@
+package cn.edu.zut.jmtshop.dao.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import cn.edu.zut.jmtshop.dao.OrderItemDao;
+import cn.edu.zut.jmtshop.dao.UserOrderDao;
+import cn.edu.zut.jmtshop.entity.OrderItem;
+import cn.edu.zut.jmtshop.entity.UserOrder;
+
+public class UserOrderDaoImpl extends HibernateDaoSupport implements
+		UserOrderDao {
+	private OrderItemDao orderItemDao;
+	
+	public OrderItemDao getOrderItemDao() {
+		return orderItemDao;
+	}
+	public void setOrderItemDao(OrderItemDao orderItemDao) {
+		this.orderItemDao = orderItemDao;
+	}
+	/**
+	 * 添加订单
+	 * */
+	@Override
+	public int addUserOrder(UserOrder userOrder) {
+		try {
+			return (Integer) this.getHibernateTemplate().save(userOrder);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	/**
+	 * 删除单个订单
+	 * */
+	@Override
+	public int deleteUserOrder(UserOrder userOrder) {
+		try {
+			//删除订单前先删除订单项
+			List<OrderItem> orderItems = orderItemDao.getUserOrderItemByOrderId(userOrder.getOrderId());
+			if(orderItems.isEmpty()){
+				this.getHibernateTemplate().delete(userOrder);
+			}else{				
+				orderItemDao.deleteOrderItemBeach(orderItems);
+				this.getHibernateTemplate().delete(userOrder);
+			}
+			return 1;				
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	/**
+	 * 修改订单
+	 * */
+	@Override
+	public int updateUserOrder(UserOrder userOrder) {
+		try {
+			this.getHibernateTemplate().update(userOrder);
+			return 1;	
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	/**
+	 * 通过订单号查询订单
+	 * */
+	@Override
+	public UserOrder getUserOrderById(int id) {
+		try {
+			return (UserOrder) this.getHibernateTemplate().find("from UserOrder where orderId = ?", id).get(0);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+            return null;
+		}
+	}
+	/**
+	 * 获取总记录数
+	 * */
+	@Override
+	public int getUserOrderCounts() {
+		
+			try {
+				Long allCounts = (Long) this.getHibernateTemplate().find("select count(*) from UserOrder").get(0);
+				return allCounts.intValue();
+			} catch (DataAccessException e) {
+				e.printStackTrace();
+			    return 0;	
+			}
+		
+	}
+	/**
+	 * 获取每页记录列表
+	 * */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserOrder> getUserOrderPrePage(int firstNum, int maxNumPrePage) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(UserOrder.class);
+		try {
+			return this.getHibernateTemplate().findByCriteria(criteria, firstNum, maxNumPrePage);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+/**
+ * 批量删除
+ * */
+	@Override
+	public int deleteUserOrderBeach(List<UserOrder> userOrders) {
+		try {
+			//删除订单前先清空各订单下的订单项
+			List<OrderItem> orderItems = new ArrayList<>();
+			for(UserOrder userOrder : userOrders){
+				orderItems.addAll(orderItemDao.getUserOrderItemByOrderId(userOrder.getOrderId()));
+			}
+			if(orderItems.isEmpty()){				
+				this.getHibernateTemplate().deleteAll(userOrders);
+			}else{
+				orderItemDao.deleteOrderItemBeach(orderItems);
+				this.getHibernateTemplate().deleteAll(userOrders);
+			}
+			return 1;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+}

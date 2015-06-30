@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<package name="product" namespace="/product" extends="json-default,json-default">
+		<!-- <result-types> <result-type name="json" class="org.apache.struts2.json.JSONResult" 
+			default="true"/> </result-types> <interceptors> <interceptor name="json" 
+			class="org.apache.struts2.json.JSONInterceptor"/> </interceptors> -->
+		<action name="superType_*" class="superTypeListAction" method="{1}">
+			<result name="list">/product/supertypelist.jsp</result>
+			<result name="edit">/product/supertypeedit.jsp</result>
+			<result name="add">/product/supertypeadd.jsp</result>
+			<result name="input">/error.jsp</result>
+		</action>
+		<action name="subType_*" class="subTypeAction" method="{1}">
+			<result name="list">/product/subtypelist.jsp</result>
+			<result name="allsupertypes">/product/subtypeadd.jsp</result>
+			<result name="edit">/product/subtypeedit.jsp</result>
+			<result name="input">/error.jsp</result>
+			<result name="view">/product/subtypeview.jsp</result>
+		</action>
+		<action name="attr_*" class="attrAction" method="{1}">
+			<result name="list">/product/attrlist.jsp</result>
+			<result name="add">/product/attradd.jsp</result>
+			<result type="json" name="json"></result>
+			<result name="save">/product/attradd.jsp</result>
+		</action>
+
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="list">/product/productlist.jsp</result>
+			<result type="json" name="json"></result>
+			<result name="supertypes">/product/productadd.jsp</result>
+		</action>
+
+		<action name="productattr_*" class="productAttrAction" method="{1}">
+			<interceptor-ref name="defaultStack">
+				<!-- 设置Action能接受的文件的最大长度，而不是对上传文件的最大长度进行限制。 (因为在Action处理之前，文件已经上传到服务器了。) -->
+				<param name="fileUpload.maximumSize">5000000</param>
+				<param name="fileUpload.allowedTypes">
+					image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<result name="add">/success.jsp</result>
+			<result>/error.jsp</result>
+		</action>
+	</package>
+
+</struts>

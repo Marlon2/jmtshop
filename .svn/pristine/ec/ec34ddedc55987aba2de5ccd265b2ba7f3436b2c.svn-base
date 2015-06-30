@@ -1,0 +1,54 @@
+package cn.edu.zut.jmtshop.action;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.SuperType;
+import cn.edu.zut.jmtshop.service.SuperTypeService;
+import cn.edu.zut.jmtshop.util.PageConstants;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class SuperTypeListAction extends ActionSupport {
+
+	private static final long serialVersionUID = 1L;
+
+	private List<SuperType> superTypes;
+	private SuperTypeService superTypeService;
+	//接受用户看的是第几页
+	private int currentPage;
+	private int totalPage;
+	@Override
+	public String execute() throws Exception {
+		totalPage = (superTypeService.getSuperTypeNums()-1)/PageConstants.MAX_PAGESIZE;
+		int firstRow = (currentPage-1)*PageConstants.MAX_PAGESIZE;
+		superTypes = superTypeService.getAllSuperType(firstRow);
+		System.out.println(totalPage+"-----------");
+		return super.execute();
+	}
+	public List<SuperType> getSuperTypes() {
+		return superTypes;
+	}
+	public void setSuperTypes(List<SuperType> superTypes) {
+		this.superTypes = superTypes;
+	}
+	public SuperTypeService getSuperTypeService() {
+		return superTypeService;
+	}
+	public void setSuperTypeService(SuperTypeService superTypeService) {
+		this.superTypeService = superTypeService;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	
+	
+}

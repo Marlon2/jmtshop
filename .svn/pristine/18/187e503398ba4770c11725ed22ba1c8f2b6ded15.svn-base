@@ -1,0 +1,136 @@
+package cn.edu.zut.jmtshop.action;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.SuperType;
+import cn.edu.zut.jmtshop.service.SuperTypeService;
+import cn.edu.zut.jmtshop.util.PageConstants;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class SuperTypeListAction extends ActionSupport {
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * e_supertypeid 修改大类传过来的参数
+	 */
+	private int e_supertypeid;
+	private SuperType e_superType;
+	//保存大类的名称，用于搜索
+	private String e_supertypename="";
+	
+	private List<SuperType> superTypes;
+	private SuperTypeService superTypeService;
+	//接受用户看的是第几页
+	private int currentPage;
+	private int totalPage;
+	private String msg;
+	private boolean msgflag = false;
+	
+	public String list(){
+		if(msgflag){
+			msgflag = false;
+		}else{
+			msg = "";
+		}
+		totalPage = (superTypeService.getSuperTypeNums(e_supertypename)-1)/PageConstants.MAX_PAGESIZE+1;
+		
+		int firstRow = (currentPage-1)*PageConstants.MAX_PAGESIZE;
+		superTypes = superTypeService.getAllSuperType(firstRow,e_supertypename);
+		System.out.println("e_supertypename:"+e_supertypename+"--totalPage:"+totalPage+"--firstRow:"+firstRow+"--");
+		return "list";
+	}
+	
+	public String edit(){
+		e_superType = superTypeService.getSuperType(e_supertypeid);
+		return "edit";
+	}
+	public String delete(){
+		superTypeService.deleteSuperType(e_supertypeid);
+		msgflag = true;
+		msg = "删除成功！";
+		return list();
+	}
+	public String save() throws Exception{
+		SuperType newSuperType = superTypeService.getSuperType(e_superType.getSupertypename());
+		if(newSuperType!=null){
+			msgflag = true;
+			msg = "该大类已经存在，修改失败！";
+			return list();
+		}
+		superTypeService.updateSuperType(e_superType);
+		msgflag = true;
+		msg = "修改成功！";
+		return list();
+	}
+	public String add() throws Exception{
+		SuperType newSuperType = superTypeService.getSuperType(e_superType.getSupertypename());
+		if(newSuperType!=null){
+			msgflag = true;
+			msg = "该大类已经存在，添加失败！";
+			return list();
+		}
+		e_superType.setSupertypeid(0);
+		superTypeService.updateSuperType(e_superType);
+		msgflag = true;
+		msg = "添加成功！";
+		return list();
+	}
+	
+	public int getE_supertypeid() {
+		return e_supertypeid;
+	}
+	
+	public SuperType getE_superType() {
+		return e_superType;
+	}
+
+	public void setE_superType(SuperType e_superType) {
+		this.e_superType = e_superType;
+	}
+
+	public void setE_supertypeid(int e_supertypeid) {
+		this.e_supertypeid = e_supertypeid;
+	}
+	public List<SuperType> getSuperTypes() {
+		return superTypes;
+	}
+	public void setSuperTypes(List<SuperType> superTypes) {
+		this.superTypes = superTypes;
+	}
+	public SuperTypeService getSuperTypeService() {
+		return superTypeService;
+	}
+	public void setSuperTypeService(SuperTypeService superTypeService) {
+		this.superTypeService = superTypeService;
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getE_supertypename() {
+		return e_supertypename;
+	}
+
+	public void setE_supertypename(String e_supertypename) {
+		this.e_supertypename = e_supertypename;
+	}
+	
+}

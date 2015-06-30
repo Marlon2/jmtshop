@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-12-20 21:53:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cn.edu.zut.jmtshop.entity.T_ad" table="T_AD">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="adType" type="int">
+            <column name="ADTYPE" />
+        </property>
+        <many-to-one name="subType" class="cn.edu.zut.jmtshop.entity.SubType" fetch="join">
+            <column name="SUBTYPEID" />
+        </many-to-one>
+        <many-to-one name="product" class="cn.edu.zut.jmtshop.entity.Product" fetch="join">
+            <column name="PRODUCTID" />
+        </many-to-one>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="beginDate" type="java.util.Date">
+            <column name="BEGINDATE" />
+        </property>
+        <property name="endDate" type="java.util.Date">
+            <column name="ENDDATE" />
+        </property>
+        <property name="picture" type="java.lang.String">
+            <column name="PICTURE" />
+        </property>
+        <property name="flag" type="int">
+            <column name="FLAG" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+package cn.edu.zut.jmtshop.dao;
+
+import java.util.List;
+
+import cn.edu.zut.jmtshop.entity.SubType;
+
+public interface SubTypeDao {
+
+	int getSubTypeNums();
+
+	List<SubType> getAllSubType(int firstRow);
+
+}

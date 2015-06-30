@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- dao -->
+
+<bean id="userOrderDao" class="cn.edu.zut.jmtshop.dao.impl.UserOrderDaoImpl">
+ <property name="sessionFactory" ref="sessionFactory"></property>
+ <property name="orderItemDao" ref="orderItemDao"></property>
+</bean>
+<bean id="orderItemDao" class="cn.edu.zut.jmtshop.dao.impl.OrderItemDaoImpl">
+  <property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+
+<!-- service -->
+
+
+<bean id="userOrderService" class="cn.edu.zut.jmtshop.service.impl.UserOrderServiceImpl">
+  <property name="userOrderDao" ref="userOrderDao"/>
+</bean>
+<bean id="orderItemService" class="cn.edu.zut.jmtshop.service.impl.OrderItemServiceImpl">
+ <property name="orderItemDao" ref="orderItemDao"></property>
+</bean>
+
+<!-- action -->
+
+
+<bean id="userOrderAction" class="cn.edu.zut.jmtshop.action.UserOrderAction">
+ <property name="userOrderService" ref="userOrderService"></property>
+</bean>
+<bean id="orderItemAction" class="cn.edu.zut.jmtshop.action.OrderItemActon">
+  <property name="orderItemService" ref="orderItemService"></property>
+</bean>
+</beans>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- dao层 -->
+<bean id="superTypeDao" class="cn.edu.zut.jmtshop.dao.impl.SuperTypeDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean id="subTypeDao" class="cn.edu.zut.jmtshop.dao.impl.SubTypeDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean id="attrDao" class="cn.edu.zut.jmtshop.dao.impl.AttrDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean id="productDao" class="cn.edu.zut.jmtshop.dao.impl.ProductDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<bean id="productAttrDao" class="cn.edu.zut.jmtshop.dao.impl.ProductAttrDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+<!-- service层 -->
+<bean id="superTypeService" class="cn.edu.zut.jmtshop.service.impl.SuperTypeServiceImpl">
+<property name="superTypeDao" ref="superTypeDao"></property>
+</bean>
+<bean id="subTypeService" class="cn.edu.zut.jmtshop.service.impl.SubTypeServiceImpl">
+<property name="subTypeDao" ref="subTypeDao"></property>
+</bean>
+<bean id="attrService" class="cn.edu.zut.jmtshop.service.impl.AttrServiceImpl">
+<property name="attrDao" ref="attrDao"></property>
+</bean>
+<bean id="productService" class="cn.edu.zut.jmtshop.service.impl.ProductServiceImpl">
+<property name="productDao" ref="productDao"></property>
+</bean>
+<bean id="productAttrService" class="cn.edu.zut.jmtshop.service.impl.ProductAttrServiceImpl">
+<property name="productAttrDao" ref="productAttrDao"></property>
+</bean>
+<!-- action层 -->
+<bean id="adminLogin" class="cn.edu.zut.jmtshop.action.AdminLoginAction"></bean>
+<bean id="superTypeListAction" class="cn.edu.zut.jmtshop.action.SuperTypeListAction">
+<property name="superTypeService" ref="superTypeService"></property>
+</bean>
+<bean id="subTypeAction" class="cn.edu.zut.jmtshop.action.SubTypeAction">
+<property name="subTypeService" ref="subTypeService"></property>
+<property name="superTypeService" ref="superTypeService"></property>
+</bean>
+<bean id="attrAction" class="cn.edu.zut.jmtshop.action.AttrAction" scope="prototype">
+<property name="superTypeService" ref="superTypeService"></property>
+<property name="attrService" ref="attrService"></property>
+</bean>
+<bean name="subtypeCascadeAction" class="cn.edu.zut.jmtshop.action.SubTypeCascadeAction">
+<property name="superTypeService" ref="superTypeService"></property>
+<property name="subTypeService" ref="subTypeService"></property>
+<property name="attrService" ref="attrService"></property>
+</bean>
+<bean id="productAction" class="cn.edu.zut.jmtshop.action.ProductAction">
+<property name="productService" ref="productService"></property>
+<property name="subTypeService" ref="subTypeService"></property>
+<property name="productAttrService" ref="productAttrService"></property>
+</bean>
+<bean id="productAttrAction" class="cn.edu.zut.jmtshop.action.ProductAttrAction">
+<property name="productAttrService" ref="productAttrService"></property>
+<property name="productService" ref="productService"></property>
+</bean>
+</beans>
